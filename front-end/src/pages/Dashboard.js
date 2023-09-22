@@ -1,9 +1,9 @@
 import Layout from "../layouts/Layout";
 
-export default function Visualise() {
+export default function Dashboard() {
     return (
         <Layout>
-            <div>Visualise</div>
+            <div>Dashboard</div>
         </Layout>
     )
 }
