@@ -7,7 +7,11 @@
 }
 
 .nav-bar {
-    @apply w-full h-20 shadow-md text-center py-4;
+    @apply w-full h-20 shadow-md py-4 flex gap-5 items-center justify-center;
+}
+
+.nav-bar-link {
+    @apply hover:text-blue-400;
 }
 
 .footer {
