@@ -10,7 +10,7 @@ export default function NavBar() {
         <div className='nav-bar'>
             {
                 links.map(link => {
-                    return <a href={link[1]} className='nav-bar-link'>{link[0]}</a>
+                    return <a href={link[1]} className='nav-bar-link' key={links.indexOf(link)}>{link[0]}</a>
                 })
             }
         </div>

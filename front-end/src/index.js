@@ -6,6 +6,8 @@ import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import Profile from './pages/Profile';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { Store } from './redux/Store';
 
 export default function App() {
     return (
@@ -23,6 +25,8 @@ export default function App() {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App />
+        <Provider store={Store}>
+            <App />
+        </Provider>
     </React.StrictMode>
 );
