@@ -7,11 +7,11 @@ input {
 }
 
 .btn-main {
-    @apply px-4 py-1 outline-none border-gray-300 border-2 rounded-lg cursor-pointer;
+    @apply px-4 py-1.5 outline-none border-gray-300 border-2 rounded-lg cursor-pointer;
 }
 
 .add {
-    @apply text-3xl text-gray-400;
+    @apply text-2xl text-gray-400;
 }
 
 .main-container {
