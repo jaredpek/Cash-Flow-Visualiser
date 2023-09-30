@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const SavingSlice = createSlice({
-    name: "Saving",
+const ExpenseSlice = createSlice({
+    name: "Expense",
     initialState: [],
     reducers: {
-        setSaving: (state, action) => {
+        setExpense: (state, action) => {
             state = action.payload;
         },
-        addSaving: (state, action) => {
+        addExpense: (state, action) => {
             state.push(action.payload);
         },
-        deleteSaving: (state, action) => {
+        deleteExpense: (state, action) => {
             state.splice(
                 state.indexOf(action.payload),
                 1,
@@ -19,5 +19,5 @@ const SavingSlice = createSlice({
     }
 })
 
-export const { setSaving, addSaving, deleteSaving } = SavingSlice.actions;
-export default SavingSlice.reducer;
+export const { setExpense, addExpense, deleteExpense } = ExpenseSlice.actions;
+export default ExpenseSlice.reducer;

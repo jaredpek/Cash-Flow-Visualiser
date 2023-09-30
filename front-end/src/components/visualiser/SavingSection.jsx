@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSaving } from "../../redux/slices/SavingSlice";
+import RecordCard from "./RecordCard";
 
 export default function SavingSection() {
     // saving = {
@@ -9,23 +10,23 @@ export default function SavingSection() {
     // }
     
     const dispatch = useDispatch();
-    const selector = useSelector(state => state.Saving);
-
-    const [amount, setAmount] = useState('');
-    const [age, setAge] = useState('');
-    const [savings, setSavings] = useState([]);
+    const savings = useSelector(state => state.Saving);
+    const [amount, setAmount] = useState("");
+    const [age, setAge] = useState("");
 
     return (
         <div>
             Saving Section
             <div className="input-section">
                 <input
+                    min={0}
                     type="number"
                     value={amount}
                     onChange={e => setAmount(e.target.value)}
-                    placeholder="Savings"
+                    placeholder="Amount"
                 />
                 <input
+                    min={0}
                     type="number"
                     value={age}
                     onChange={e => setAge(e.target.value)}
@@ -45,8 +46,12 @@ export default function SavingSection() {
                 </div>
             </div>
             <div>
-                {selector.map(saving => {
-                    return <div key={selector.indexOf(saving)}>{saving.age}: {saving.amount}</div>
+                {savings.map(saving => {
+                    return (
+                        <RecordCard key={savings.indexOf(saving)}>
+                            {saving.age}: {saving.amount}
+                        </RecordCard>
+                    )
                 })}
             </div>
         </div>
