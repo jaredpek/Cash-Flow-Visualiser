@@ -8,10 +8,7 @@ const IncomeSlice = createSlice({
             state.push(action.payload);
         },
         deleteIncome: (state, action) => {
-            state.splice(
-                state.indexOf(action.payload),
-                1,
-            )
+            state.splice(action.payload, 1)
         }
     }
 })

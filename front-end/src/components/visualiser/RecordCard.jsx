@@ -1,15 +1,33 @@
-import { BsFillTrash3Fill } from "react-icons/bs";
+import { useState } from "react";
+import { BiTrash, BiEditAlt, BiCheck } from "react-icons/bi";
 
-export default function RecordCard({ children, deleteRecord }) {
+export default function RecordCard({ children, updateRecord, deleteRecord }) {
+    const [updating, setUpdating] = useState(false);
     return (
         <div className="record-card">
-            <div>
+            <div className="record-details">
                 {children}
             </div>
-            <BsFillTrash3Fill
-                onClick={deleteRecord}
-                className="icon"
-            />
+            <div className="icon-section">
+                {
+                    updating ?
+                    <BiCheck
+                        onClick={() => {
+                            setUpdating(false);
+                            updateRecord();
+                        }}
+                        className="icon update"
+                    /> :
+                    <BiEditAlt
+                        onClick={() => {setUpdating(true)}}
+                        className="icon update"
+                    />
+                }
+                <BiTrash
+                    onClick={deleteRecord}
+                    className="icon delete"
+                />
+            </div>
         </div>
     )
 }

@@ -19,23 +19,27 @@ hr {
 }
 
 .icon {
-    @apply text-gray-400 text-lg ml-5 hover:text-red-400 hover:cursor-pointer shrink-0;
+    @apply text-gray-400 text-2xl hover:cursor-pointer shrink-0;
+}
+
+.update {
+    @apply hover:text-blue-400;
+}
+
+.delete {
+    @apply hover:text-red-400;
 }
 
 .main-container {
     @apply w-full py-10 px-6 shadow-md;
 }
 
-.chart-overflow {
-    @apply w-full overflow-x-auto;
+.chart-container {
+    @apply w-[75vw] h-[600px] py-6 select-none overflow-x-auto mx-auto;
 }
 
 .chart {
     @apply min-w-[500px] h-full;
-}
-
-.chart-container {
-    @apply w-[60vw] min-[390px]:w-[80vw] h-[600px] py-4 select-none mx-auto;
 }
 
 .nav-bar {
@@ -55,9 +59,17 @@ hr {
 }
 
 .record-section {
-    @apply w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-3 select-none;
+    @apply w-full grid min-[550px]:grid-cols-2 min-[800px]:grid-cols-3 min-[1200px]:grid-cols-4 gap-3 mt-3 select-none;
 }
 
 .record-card {
-    @apply py-3 px-5 border-2 border-gray-300 rounded-lg flex items-center select-none;
+    @apply py-3 px-4 border-2 border-gray-300 rounded-lg flex items-center justify-between select-none;
+}
+
+.record-details {
+    @apply flex-grow;
+}
+
+.icon-section {
+    @apply grid gap-3 ml-4;
 }

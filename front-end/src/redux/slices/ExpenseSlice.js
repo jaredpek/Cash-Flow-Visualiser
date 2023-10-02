@@ -8,10 +8,7 @@ const ExpenseSlice = createSlice({
             state.push(action.payload);
         },
         deleteExpense: (state, action) => {
-            state.splice(
-                state.indexOf(action.payload),
-                1,
-            )
+            state.splice(action.payload, 1)
         }
     }
 })

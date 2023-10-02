@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addExpense, deleteExpense } from "../../redux/slices/ExpenseSlice";
 import RecordCard from "./RecordCard";
 import { getKey } from "../../lib/Helpers";
-import { BsPlusSquare } from "react-icons/bs";
 
 export default function ExpenseSection() {
     // expense = {
@@ -80,9 +79,11 @@ export default function ExpenseSection() {
                     return (
                         <RecordCard
                             key={getKey()}
-                            deleteRecord={() => {dispatch(deleteExpense(expense))}}
+                            deleteRecord={() => {dispatch(deleteExpense(expenses.indexOf(expense)))}}
                         >
-                            {expense.name}: {expense.startAge} - {expense.endAge}: {expense.annualAmount}
+                            {expense.name} ({expense.startAge} to {expense.endAge})
+                            <hr />
+                            ${expense.annualAmount} p.a.
                         </RecordCard>
                     )
                 })}

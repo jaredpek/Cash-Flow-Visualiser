@@ -79,13 +79,11 @@ export default function IncomeSection() {
                     return (
                         <RecordCard
                             key={getKey()}
-                            deleteRecord={() => {dispatch(deleteIncome(income))}}
+                            deleteRecord={() => {dispatch(deleteIncome(incomes.indexOf(income)))}}
                         >
-                            <div>
-                                {income.name} ({income.startAge} to {income.endAge})
-                                <hr />
-                                {income.annualAmount}
-                            </div>
+                            {income.name} ({income.startAge} to {income.endAge})
+                            <hr />
+                            ${income.annualAmount} p.a.
                         </RecordCard>
                     )
                 })}

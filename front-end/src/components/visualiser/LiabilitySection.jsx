@@ -91,9 +91,12 @@ export default function LiabilitySection() {
                     return (
                         <RecordCard
                             key={getKey()}
-                            deleteRecord={() => {dispatch(deleteLiability(liability))}}
+                            deleteRecord={() => {dispatch(deleteLiability(liabilities.indexOf(liability)))}}
                         >
-                            {liability.name}: {liability.startAge} - {liability.endAge}: {liability.initialAmount} + {liability.annualAmount} annually
+                            {liability.name} ({liability.startAge} to {liability.endAge})
+                            <hr />
+                            ${liability.initialAmount} initial + <br />
+                            ${liability.annualAmount} p.a.
                         </RecordCard>
                     )
                 })}

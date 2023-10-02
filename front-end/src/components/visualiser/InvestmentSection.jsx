@@ -127,9 +127,15 @@ export default function InvestmentSection() {
                     return (
                         <RecordCard
                             key={getKey()}
-                            deleteRecord={() => {dispatch(deleteInvestment(investment))}}
+                            deleteRecord={() => {dispatch(deleteInvestment(investments.indexOf(investment)))}}
                         >
-                            {investment.name}: {investment.startAge} - {investment.endAge}: {investment.initialAmount} + {investment.annualAmount} annually at {investment.annualInterest}% interest and withdraw {investment.annualWithdrawAmount} annually from age {investment.withdrawAge}
+                            {investment.name} ({investment.startAge} to {investment.endAge})
+                            <hr />
+                            ${investment.initialAmount} initial + <br />
+                            ${investment.annualAmount} at {investment.annualInterest}% p.a.
+                            <hr />
+                            Withdraw ${investment.annualWithdrawAmount} p.a. <br />
+                            From {investment.withdrawAge} y.o.
                         </RecordCard>
                     )
                 })}
