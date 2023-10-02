@@ -38,9 +38,10 @@ export function computeExpense(entries) {
 }
 
 export function computeInvestment(entries) {
-    let principal = generateList();
-    let investments = generateList();
-    entries.forEach(({initialAmount, annualAmount, annualInterest, startAge, endAge}) => {
+    let principal = generateList(false);
+    let withdrawals = generateList(false);
+    let investments = generateList(false);
+    entries.forEach(({initialAmount, annualAmount, annualInterest, startAge, endAge, withdrawAge, annualWithdrawAmount}) => {
         let balances = generateList();
         balances[startAge] = initialAmount * (annualInterest / 100 + 1) + annualAmount;
         principal[startAge] += (initialAmount + annualAmount);
@@ -51,12 +52,22 @@ export function computeInvestment(entries) {
                 principal[i] += annualAmount;
             }
             else {
-                balances[i] = balances[i - 1] * (annualInterest / 100 + 1)
+                balances[i] = balances[i - 1] * (annualInterest / 100 + 1);
+                if (i >= withdrawAge) {
+                    if (balances[i] >= annualWithdrawAmount) {
+                        balances[i] -= annualWithdrawAmount;
+                        withdrawals[i] += annualWithdrawAmount;
+                    }
+                    else {
+                        withdrawals[i] += balances[i];
+                        balances[i] = 0;
+                    }
+                }
             }
             investments[i] += balances[i];
         }
     })
-    return {principal, investments};
+    return {principal, withdrawals, investments};
 }
 
 export function computeLiability(entries) {
@@ -73,12 +84,12 @@ export function computeLiability(entries) {
 export function getBalance(incomeEntries, expenseEntries, investmentEntries, liabilityEntries) {
     const {incomes} = computeIncome(incomeEntries);
     const {expenses} = computeExpense(expenseEntries);
-    const {principal, investments} = computeInvestment(investmentEntries);
+    const {principal, withdrawals, investments} = computeInvestment(investmentEntries);
     const {liabilities} = computeLiability(liabilityEntries);
 
     let cash = generateList(false);
     for (let i = minAge + 1; i <= maxAge; i ++) {
-        cash[i] = cash[i - 1] + incomes[i] - expenses[i] - principal[i] - liabilities[i];
+        cash[i] = cash[i - 1] + incomes[i] - expenses[i] - principal[i] + withdrawals[i] - liabilities[i];
     }
 
     return {cash, investments};

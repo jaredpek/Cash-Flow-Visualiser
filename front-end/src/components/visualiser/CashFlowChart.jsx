@@ -29,20 +29,26 @@ export default function CashFlowChart() {
         <div>
             Cash Flow Chart
             <div className="input-section">
-                <input
-                    min={0}
-                    type="number"
-                    value={minAge}
-                    onChange={e => setMinAge(e.target.value)}
-                    placeholder="Minimum Age"
-                />
-                <input
-                    min={0}
-                    type="number"
-                    value={maxAge}
-                    onChange={e => setMaxAge(e.target.value)}
-                    placeholder="Maximum Age"
-                />
+                <div>
+                    <label>From: </label>
+                    <input
+                        min={0}
+                        type="number"
+                        value={minAge}
+                        onChange={e => setMinAge(e.target.value)}
+                        placeholder="Minimum Age"
+                    />
+                </div>
+                <div>
+                    <label>To: </label>
+                    <input
+                        min={0}
+                        type="number"
+                        value={maxAge}
+                        onChange={e => setMaxAge(e.target.value)}
+                        placeholder="Maximum Age"
+                    />
+                </div>
             </div>
             <LineChart balances={balances} minAge={Number(minAge)} maxAge={Number(maxAge)} />
         </div>
