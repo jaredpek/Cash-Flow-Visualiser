@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addLiability, deleteLiability } from "../../redux/slices/LiabilitySlice";
-import RecordCard from "./RecordCard";
+import { addLiability } from "../../redux/slices/LiabilitySlice";
 import { getKey } from "../../lib/Helpers";
+import LiabilityRecord from "./records/LiabilityRecord";
 
 export default function LiabilitySection() {
     // liability = {
@@ -88,17 +88,7 @@ export default function LiabilitySection() {
             </div>
             <div className="record-section">
                 {liabilities.map(liability => {
-                    return (
-                        <RecordCard
-                            key={getKey()}
-                            deleteRecord={() => {dispatch(deleteLiability(liabilities.indexOf(liability)))}}
-                        >
-                            {liability.name} ({liability.startAge} to {liability.endAge})
-                            <hr />
-                            ${liability.initialAmount} initial + <br />
-                            ${liability.annualAmount} p.a.
-                        </RecordCard>
-                    )
+                    return <LiabilityRecord key={getKey()} index={liabilities.indexOf(liability)} liability={liability} />
                 })}
             </div>
         </div>

@@ -7,11 +7,15 @@ const ExpenseSlice = createSlice({
         addExpense: (state, action) => {
             state.push(action.payload);
         },
+        updateExpense: (state, action) => {
+            const {index, data} = action.payload;
+            state[index] = data;
+        },
         deleteExpense: (state, action) => {
             state.splice(action.payload, 1)
         }
     }
 })
 
-export const { addExpense, deleteExpense } = ExpenseSlice.actions;
+export const { addExpense, updateExpense, deleteExpense } = ExpenseSlice.actions;
 export default ExpenseSlice.reducer;

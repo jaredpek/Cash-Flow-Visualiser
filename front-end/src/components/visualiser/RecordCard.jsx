@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { BiTrash, BiEditAlt, BiCheck } from "react-icons/bi";
 
-export default function RecordCard({ children, updateRecord, deleteRecord }) {
-    const [updating, setUpdating] = useState(false);
+export default function RecordCard({ children, updating, setUpdating, updateRecord, deleteRecord }) {
     return (
         <div className="record-card">
             <div className="record-details">
