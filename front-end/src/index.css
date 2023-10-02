@@ -18,6 +18,10 @@ input {
     @apply py-10 px-6 shadow-md;
 }
 
+.chart-container {
+    @apply px-10 max-h-[700px] flex items-center justify-center;
+}
+
 .nav-bar {
     @apply w-full h-20 shadow-md py-4 flex gap-5 items-center justify-center;
 }

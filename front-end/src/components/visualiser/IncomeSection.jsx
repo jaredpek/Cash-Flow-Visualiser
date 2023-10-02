@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addIncome } from "../../redux/slices/IncomeSlice";
 import RecordCard from "./RecordCard";
+import { getKey } from "../../lib/Helpers";
 
 export default function IncomeSection() {
     // income = {
@@ -16,10 +17,16 @@ export default function IncomeSection() {
     const [annualAmount, setAnnualAmount] = useState("");
     const [startAge, setStartAge] = useState("");
     const [endAge, setEndAge] = useState("");
+
+    useEffect(() => {
+        if (annualAmount < 0) setAnnualAmount(0)
+        if (startAge < 0) setStartAge(0)
+        if (endAge < 0) setEndAge(0)
+    }, [annualAmount, startAge, endAge])
     
     return (
         <div>
-            Income Section
+            Income
             <div className="input-section">
                 <input
                     min={0}
@@ -46,7 +53,9 @@ export default function IncomeSection() {
                     className="btn-main add"
                     onClick={() => {
                         dispatch(addIncome({
-                            annualAmount, startAge, endAge,
+                            annualAmount: Number(annualAmount), 
+                            startAge: Number(startAge), 
+                            endAge: Number(endAge),
                         }))
                         setAnnualAmount("");
                         setStartAge("");
@@ -59,7 +68,7 @@ export default function IncomeSection() {
             <div>
                 {incomes.map(income => {
                     return (
-                        <RecordCard key={incomes.indexOf(income)}>
+                        <RecordCard key={getKey()}>
                             {income.startAge} - {income.endAge}: {income.annualAmount}
                         </RecordCard>
                     )

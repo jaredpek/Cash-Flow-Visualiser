@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { generateList } from "../../lib/Financials";
 
 const BalanceSlice = createSlice({
     name: "Balance",
-    initialState: [],
+    initialState: {
+        cash: generateList(false),
+        investments: generateList(false),
+    },
     reducers: {
         setBalance: (state, action) => {
-            state = action.payload;
+            Object.assign(state, action.payload);
         }
     }
 })

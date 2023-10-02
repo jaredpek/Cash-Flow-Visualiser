@@ -4,9 +4,6 @@ const IncomeSlice = createSlice({
     name: "Income",
     initialState: [],
     reducers: {
-        setIncome: (state, action) => {
-            state = action.payload;
-        },
         addIncome: (state, action) => {
             state.push(action.payload);
         },
@@ -19,5 +16,5 @@ const IncomeSlice = createSlice({
     }
 })
 
-export const { setIncome, addIncome, deleteIncome } = IncomeSlice.actions;
+export const { addIncome, deleteIncome } = IncomeSlice.actions;
 export default IncomeSlice.reducer;

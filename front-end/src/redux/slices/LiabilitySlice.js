@@ -4,9 +4,6 @@ const LiabilitySlice = createSlice({
     name: "Liability",
     initialState: [],
     reducers: {
-        setLiability: (state, action) => {
-            state = action.payload;
-        },
         addLiability: (state, action) => {
             state.push(action.payload);
         },
@@ -19,5 +16,5 @@ const LiabilitySlice = createSlice({
     }
 })
 
-export const { setLiability, addLiability, deleteLiability } = LiabilitySlice.actions;
+export const { addLiability, deleteLiability } = LiabilitySlice.actions;
 export default LiabilitySlice.reducer;

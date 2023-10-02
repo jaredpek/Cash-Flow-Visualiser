@@ -4,9 +4,6 @@ const InvestmentSlice = createSlice({
     name: "Investment",
     initialState: [],
     reducers: {
-        setInvestment: (state, action) => {
-            state = action.payload;
-        },
         addInvestment: (state, action) => {
             state.push(action.payload);
         },
@@ -19,5 +16,5 @@ const InvestmentSlice = createSlice({
     }
 })
 
-export const { setInvestment, addInvestment, deleteInvestment } = InvestmentSlice.actions;
+export const { addInvestment, deleteInvestment } = InvestmentSlice.actions;
 export default InvestmentSlice.reducer;

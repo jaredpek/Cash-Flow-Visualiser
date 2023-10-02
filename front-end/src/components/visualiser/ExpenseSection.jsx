@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addExpense } from "../../redux/slices/ExpenseSlice";
 import RecordCard from "./RecordCard";
+import { getKey } from "../../lib/Helpers";
 
 export default function ExpenseSection() {
     // expense = {
@@ -22,10 +23,10 @@ export default function ExpenseSection() {
         if (startAge < 0) setStartAge(0)
         if (endAge < 0) setEndAge(0)
     }, [annualAmount, startAge, endAge])
-    
+
     return (
         <div>
-            Expense Section
+            Expenses
             <div className="input-section">
                 <input
                     min={0}
@@ -52,7 +53,9 @@ export default function ExpenseSection() {
                     className="btn-main add"
                     onClick={() => {
                         dispatch(addExpense({
-                            annualAmount, startAge, endAge,
+                            annualAmount: Number(annualAmount), 
+                            startAge: Number(startAge), 
+                            endAge: Number(endAge),
                         }))
                         setAnnualAmount("");
                         setStartAge("");
@@ -65,7 +68,7 @@ export default function ExpenseSection() {
             <div>
                 {expenses.map(expense => {
                     return (
-                        <RecordCard key={expenses.indexOf(expense)}>
+                        <RecordCard key={getKey()}>
                             {expense.startAge} - {expense.endAge}: {expense.annualAmount}
                         </RecordCard>
                     )

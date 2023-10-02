@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addInvestment } from "../../redux/slices/InvestmentSlice";
 import RecordCard from "./RecordCard";
+import { getKey } from "../../lib/Helpers";
 
 export default function InvestmentSection() {
     // investment = {
@@ -20,10 +21,18 @@ export default function InvestmentSection() {
     const [annualInterest, setAnnualInterest] = useState("");
     const [startAge, setStartAge] = useState("");
     const [endAge, setEndAge] = useState("");
-    
+
+    useEffect(() => {
+        if (initialAmount < 0) setInitialAmount(0);
+        if (annualAmount < 0) setAnnualAmount(0);
+        if (annualInterest < 0) setAnnualInterest(0);
+        if (startAge < 0) setStartAge(0);
+        if (endAge < 0) setEndAge(0);
+    }, [initialAmount, annualAmount, annualInterest, startAge, endAge])
+
     return (
         <div>
-            Investment Section
+            Investments
             <div className="input-section">
                 <input
                     min={0}
@@ -64,7 +73,11 @@ export default function InvestmentSection() {
                     className="btn-main add"
                     onClick={() => {
                         dispatch(addInvestment({
-                            initialAmount, annualAmount, annualInterest, startAge, endAge,
+                            initialAmount: Number(initialAmount), 
+                            annualAmount: Number(annualAmount), 
+                            annualInterest: Number(annualInterest), 
+                            startAge: Number(startAge), 
+                            endAge: Number(endAge),
                         }))
                         setInitialAmount("");
                         setAnnualAmount("");
@@ -79,7 +92,7 @@ export default function InvestmentSection() {
             <div>
                 {investments.map(investment => {
                     return (
-                        <RecordCard key={investments.indexOf(investment)}>
+                        <RecordCard key={getKey()}>
                             {investment.startAge} - {investment.endAge}: {investment.initialAmount} + {investment.annualAmount} annually at {investment.annualInterest}% interest
                         </RecordCard>
                     )

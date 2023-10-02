@@ -1,6 +1,5 @@
 import Layout from "../layouts/Layout";
 import CashFlowChart from "../components/visualiser/CashFlowChart";
-import SavingSection from "../components/visualiser/SavingSection";
 import IncomeSection from "../components/visualiser/IncomeSection";
 import ExpenseSection from "../components/visualiser/ExpenseSection";
 import InvestmentSection from "../components/visualiser/InvestmentSection";
@@ -12,7 +11,6 @@ export default function Dashboard() {
             <div className="grid gap-5">
                 <div>Dashboard</div>
                 <CashFlowChart />
-                <SavingSection />
                 <IncomeSection />
                 <ExpenseSection />
                 <InvestmentSection />
