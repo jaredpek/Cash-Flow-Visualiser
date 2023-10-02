@@ -19,7 +19,7 @@ input {
 }
 
 .chart-container {
-    @apply px-10 max-h-[700px] flex items-center justify-center;
+    @apply px-10 max-h-[700px] flex items-center justify-center select-none;
 }
 
 .nav-bar {
@@ -35,5 +35,5 @@ input {
 }
 
 .input-section {
-    @apply flex gap-3;
+    @apply flex gap-3 select-none;
 }

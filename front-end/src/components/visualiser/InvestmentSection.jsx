@@ -4,20 +4,22 @@ import { addInvestment } from "../../redux/slices/InvestmentSlice";
 import RecordCard from "./RecordCard";
 import { getKey } from "../../lib/Helpers";
 
-export default function InvestmentSection() {
-    // investment = {
-    //     initialAmout: Number,
-    //     annualAmount: Number,
-    //     annualInterest: Number,    // percentage form, so specify 5 to indicate 5%
-    //     startAge: Number,
-    //     endAge: Number,
-    //     withdrawAge: Number,
-    //     annualWithdrawAmount: Number
-    // }
+// investment = {
+//     name: String,
+//     initialAmout: Number,
+//     annualAmount: Number,
+//     annualInterest: Number,    // percentage form, so specify 5 to indicate 5%
+//     startAge: Number,
+//     endAge: Number,
+//     withdrawAge: Number,
+//     annualWithdrawAmount: Number
+// }
 
+export default function InvestmentSection() {
     const dispatch = useDispatch();
     const investments = useSelector(state => state.Investment)
 
+    const [name, setName] = useState("");
     const [initialAmount, setInitialAmount] = useState("");
     const [annualAmount, setAnnualAmount] = useState("");
     const [annualInterest, setAnnualInterest] = useState("");
@@ -40,6 +42,11 @@ export default function InvestmentSection() {
         <div>
             Investments
             <div className="input-section">
+                <input
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    placeholder="Name"
+                />
                 <input
                     min={0}
                     type="number"
@@ -93,6 +100,7 @@ export default function InvestmentSection() {
                     className="btn-main add"
                     onClick={() => {
                         dispatch(addInvestment({
+                            name,
                             initialAmount: Number(initialAmount), 
                             annualAmount: Number(annualAmount), 
                             annualInterest: Number(annualInterest), 
@@ -101,6 +109,7 @@ export default function InvestmentSection() {
                             withdrawAge: Number(withdrawAge),
                             annualWithdrawAmount: Number(annualWithdrawAmount),
                         }))
+                        setName("");
                         setInitialAmount("");
                         setAnnualAmount("");
                         setAnnualInterest("");
@@ -117,7 +126,7 @@ export default function InvestmentSection() {
                 {investments.map(investment => {
                     return (
                         <RecordCard key={getKey()}>
-                            {investment.startAge} - {investment.endAge}: {investment.initialAmount} + {investment.annualAmount} annually at {investment.annualInterest}% interest and withdraw {investment.annualWithdrawAmount} annually from age {investment.withdrawAge}
+                            {investment.name}: {investment.startAge} - {investment.endAge}: {investment.initialAmount} + {investment.annualAmount} annually at {investment.annualInterest}% interest and withdraw {investment.annualWithdrawAmount} annually from age {investment.withdrawAge}
                         </RecordCard>
                     )
                 })}

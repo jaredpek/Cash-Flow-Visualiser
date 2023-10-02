@@ -6,6 +6,7 @@ import { getKey } from "../../lib/Helpers";
 
 export default function IncomeSection() {
     // income = {
+    //     name: String,
     //     annualAmount: Number,
     //     startAge: Number,
     //     endAge: Number,
@@ -14,6 +15,7 @@ export default function IncomeSection() {
     const dispatch = useDispatch();
     const incomes = useSelector(state => state.Income)
 
+    const [name, setName] = useState("");
     const [annualAmount, setAnnualAmount] = useState("");
     const [startAge, setStartAge] = useState("");
     const [endAge, setEndAge] = useState("");
@@ -28,6 +30,11 @@ export default function IncomeSection() {
         <div>
             Income
             <div className="input-section">
+                <input
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    placeholder="Name"
+                />
                 <input
                     min={0}
                     type="number"
@@ -53,10 +60,12 @@ export default function IncomeSection() {
                     className="btn-main add"
                     onClick={() => {
                         dispatch(addIncome({
+                            name,
                             annualAmount: Number(annualAmount), 
                             startAge: Number(startAge), 
                             endAge: Number(endAge),
                         }))
+                        setName("");
                         setAnnualAmount("");
                         setStartAge("");
                         setEndAge("");
@@ -69,7 +78,7 @@ export default function IncomeSection() {
                 {incomes.map(income => {
                     return (
                         <RecordCard key={getKey()}>
-                            {income.startAge} - {income.endAge}: {income.annualAmount}
+                            {income.name}: {income.startAge} - {income.endAge}: {income.annualAmount}
                         </RecordCard>
                     )
                 })}

@@ -6,6 +6,7 @@ import { getKey } from "../../lib/Helpers";
 
 export default function ExpenseSection() {
     // expense = {
+    //     name: String,
     //     annualAmount: Number,
     //     startAge: Number,
     //     endAge: Number,
@@ -14,6 +15,7 @@ export default function ExpenseSection() {
     const dispatch = useDispatch();
     const expenses = useSelector(state => state.Expense)
 
+    const [name, setName] = useState("");
     const [annualAmount, setAnnualAmount] = useState("");
     const [startAge, setStartAge] = useState("");
     const [endAge, setEndAge] = useState("");
@@ -28,6 +30,11 @@ export default function ExpenseSection() {
         <div>
             Expenses
             <div className="input-section">
+                <input
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    placeholder="Name"
+                />
                 <input
                     min={0}
                     type="number"
@@ -53,10 +60,12 @@ export default function ExpenseSection() {
                     className="btn-main add"
                     onClick={() => {
                         dispatch(addExpense({
+                            name,
                             annualAmount: Number(annualAmount), 
                             startAge: Number(startAge), 
                             endAge: Number(endAge),
                         }))
+                        setName("");
                         setAnnualAmount("");
                         setStartAge("");
                         setEndAge("");
@@ -69,7 +78,7 @@ export default function ExpenseSection() {
                 {expenses.map(expense => {
                     return (
                         <RecordCard key={getKey()}>
-                            {expense.startAge} - {expense.endAge}: {expense.annualAmount}
+                            {expense.name}: {expense.startAge} - {expense.endAge}: {expense.annualAmount}
                         </RecordCard>
                     )
                 })}

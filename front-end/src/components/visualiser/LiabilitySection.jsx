@@ -6,6 +6,7 @@ import { getKey } from "../../lib/Helpers";
 
 export default function LiabilitySection() {
     // liability = {
+    //     name: String,
     //     initialAmount: Number,
     //     annualAmount: Number,
     //     startAge: Number,
@@ -15,6 +16,7 @@ export default function LiabilitySection() {
     const dispatch = useDispatch();
     const liabilities = useSelector(state => state.Liability)
 
+    const [name, setName] = useState("");
     const [initialAmount, setInitialAmount] = useState("");
     const [annualAmount, setAnnualAmount] = useState("");
     const [startAge, setStartAge] = useState("");
@@ -31,6 +33,11 @@ export default function LiabilitySection() {
         <div>
             Liabilities
             <div className="input-section">
+                <input
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    placeholder="Name"
+                />
                 <input
                     min={0}
                     type="number"
@@ -63,11 +70,13 @@ export default function LiabilitySection() {
                     className="btn-main add"
                     onClick={() => {
                         dispatch(addLiability({
+                            name,
                             initialAmount: Number(initialAmount), 
                             annualAmount: Number(annualAmount), 
                             startAge: Number(startAge), 
                             endAge: Number(endAge),
                         }))
+                        setName("");
                         setInitialAmount("");
                         setAnnualAmount("");
                         setStartAge("");
@@ -81,7 +90,7 @@ export default function LiabilitySection() {
                 {liabilities.map(liability => {
                     return (
                         <RecordCard key={getKey()}>
-                            {liability.startAge} - {liability.endAge}: {liability.initialAmount} + {liability.annualAmount} annually
+                            {liability.name}: {liability.startAge} - {liability.endAge}: {liability.initialAmount} + {liability.annualAmount} annually
                         </RecordCard>
                     )
                     

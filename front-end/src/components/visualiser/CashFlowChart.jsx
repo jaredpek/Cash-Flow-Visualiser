@@ -28,6 +28,7 @@ export default function CashFlowChart() {
     return (
         <div>
             Cash Flow Chart
+            <div>Financial Window:</div>
             <div className="input-section">
                 <div>
                     <label>From: </label>
