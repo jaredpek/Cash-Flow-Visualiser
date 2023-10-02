@@ -1,6 +1,6 @@
 export default function RecordCard({ children }) {
     return (
-        <div>
+        <div className="record-card">
             {children}
         </div>
     )

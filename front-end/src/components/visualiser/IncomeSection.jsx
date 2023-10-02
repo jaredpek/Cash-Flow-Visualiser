@@ -74,7 +74,7 @@ export default function IncomeSection() {
                     +
                 </div>
             </div>
-            <div>
+            <div className="record-section">
                 {incomes.map(income => {
                     return (
                         <RecordCard key={getKey()}>

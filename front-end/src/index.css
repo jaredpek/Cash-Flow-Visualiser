@@ -15,11 +15,11 @@ input {
 }
 
 .main-container {
-    @apply py-10 px-6 shadow-md;
+    @apply w-full py-10 px-6 shadow-md;
 }
 
 .chart-container {
-    @apply px-10 max-h-[700px] flex items-center justify-center select-none;
+    @apply w-full max-h-[600px] px-2 select-none mx-auto;
 }
 
 .nav-bar {
@@ -35,5 +35,13 @@ input {
 }
 
 .input-section {
-    @apply flex gap-3 select-none;
+    @apply w-full flex gap-3 select-none flex-wrap;
+}
+
+.record-section {
+    @apply w-full grid grid-cols-6 gap-3 mt-3;
+}
+
+.record-card {
+    @apply py-3 px-5 border-2 border-gray-300 rounded-lg;
 }
