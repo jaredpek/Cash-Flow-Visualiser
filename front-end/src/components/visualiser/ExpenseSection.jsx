@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addExpense } from "../../redux/slices/ExpenseSlice";
+import { addExpense, deleteExpense } from "../../redux/slices/ExpenseSlice";
 import RecordCard from "./RecordCard";
 import { getKey } from "../../lib/Helpers";
+import { BsPlusSquare } from "react-icons/bs";
 
 export default function ExpenseSection() {
     // expense = {
@@ -74,10 +75,13 @@ export default function ExpenseSection() {
                     +
                 </div>
             </div>
-            <div>
+            <div className="record-section">
                 {expenses.map(expense => {
                     return (
-                        <RecordCard key={getKey()}>
+                        <RecordCard
+                            key={getKey()}
+                            deleteRecord={() => {dispatch(deleteExpense(expense))}}
+                        >
                             {expense.name}: {expense.startAge} - {expense.endAge}: {expense.annualAmount}
                         </RecordCard>
                     )

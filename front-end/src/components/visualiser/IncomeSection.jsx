@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addIncome } from "../../redux/slices/IncomeSlice";
+import { addIncome, deleteIncome } from "../../redux/slices/IncomeSlice";
 import RecordCard from "./RecordCard";
 import { getKey } from "../../lib/Helpers";
 
@@ -77,7 +77,10 @@ export default function IncomeSection() {
             <div className="record-section">
                 {incomes.map(income => {
                     return (
-                        <RecordCard key={getKey()}>
+                        <RecordCard
+                            key={getKey()}
+                            deleteRecord={() => {dispatch(deleteIncome(income))}}
+                        >
                             {income.name}: {income.startAge} - {income.endAge}: {income.annualAmount}
                         </RecordCard>
                     )

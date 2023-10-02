@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addInvestment } from "../../redux/slices/InvestmentSlice";
+import { addInvestment, deleteInvestment } from "../../redux/slices/InvestmentSlice";
 import RecordCard from "./RecordCard";
 import { getKey } from "../../lib/Helpers";
 
@@ -122,10 +122,13 @@ export default function InvestmentSection() {
                     +
                 </div>
             </div>
-            <div>
+            <div className="record-section">
                 {investments.map(investment => {
                     return (
-                        <RecordCard key={getKey()}>
+                        <RecordCard
+                            key={getKey()}
+                            deleteRecord={() => {dispatch(deleteInvestment(investment))}}
+                        >
                             {investment.name}: {investment.startAge} - {investment.endAge}: {investment.initialAmount} + {investment.annualAmount} annually at {investment.annualInterest}% interest and withdraw {investment.annualWithdrawAmount} annually from age {investment.withdrawAge}
                         </RecordCard>
                     )

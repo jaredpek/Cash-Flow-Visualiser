@@ -3,7 +3,7 @@ import { generateList } from "../../lib/Financials";
 
 export default function LineChart({ balances, minAge, maxAge }) {
     return (
-        <div className='chart-container' style={{position: "relative", height: "100vh", width: "90vw"}}>
+        <div className='chart-container' style={{position: "relative", height: "100vh", width: "85vw"}}>
             <Line
                 className='w-full h-full'
                 data={{

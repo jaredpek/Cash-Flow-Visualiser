@@ -14,12 +14,16 @@ input {
     @apply text-2xl text-gray-400;
 }
 
+.icon {
+    @apply text-gray-400 text-lg ml-5 hover:text-red-400 hover:cursor-pointer shrink-0;
+}
+
 .main-container {
     @apply w-full py-10 px-6 shadow-md;
 }
 
 .chart-container {
-    @apply w-full max-h-[600px] px-2 select-none mx-auto;
+    @apply w-full max-h-[700px] px-2 py-4 select-none mx-auto;
 }
 
 .nav-bar {
@@ -39,9 +43,9 @@ input {
 }
 
 .record-section {
-    @apply w-full grid grid-cols-6 gap-3 mt-3;
+    @apply w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-3 select-none;
 }
 
 .record-card {
-    @apply py-3 px-5 border-2 border-gray-300 rounded-lg;
+    @apply py-3 px-5 border-2 border-gray-300 rounded-lg flex items-center justify-between select-none;
 }
