@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import ModalForm from "../records/ModalForm";
-import { addExpense } from "../../../redux/slices/ExpenseSlice";
+import { addExpense, updateExpense } from "../../../redux/slices/ExpenseSlice";
 import { useDispatch } from "react-redux";
 
-export default function ExpenseForm({ setState }) {
+export default function ExpenseForm({ setState, index, expense, mode }) {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
-    const [annualAmount, setAnnualAmount] = useState("");
-    const [startAge, setStartAge] = useState("");
-    const [endAge, setEndAge] = useState("");
+    const [name, setName] = useState((mode == "update") ? expense.name : "");
+    const [annualAmount, setAnnualAmount] = useState((mode == "update") ? expense.annualAmount : "");
+    const [startAge, setStartAge] = useState((mode == "update") ? expense.startAge : "");
+    const [endAge, setEndAge] = useState((mode == "update") ? expense.endAge : "");
 
     useEffect(() => {
         if (annualAmount < 0) setAnnualAmount(0)
@@ -49,18 +49,34 @@ export default function ExpenseForm({ setState }) {
                 />
                 <div 
                     className="btn-main"
-                    onClick={() => {
-                        dispatch(addExpense({
-                            name,
-                            annualAmount: Number(annualAmount), 
-                            startAge: Number(startAge), 
-                            endAge: Number(endAge),
-                        }))
-                        setName("");
-                        setAnnualAmount("");
-                        setStartAge("");
-                        setEndAge("");
-                    }}
+                    onClick={
+                        (mode == "update") ?
+                        () => {
+                            dispatch(updateExpense({
+                                index, 
+                                data: {
+                                    name, 
+                                    annualAmount: Number(annualAmount), 
+                                    startAge: Number(startAge), 
+                                    endAge: Number(endAge)
+                                }
+                            }))
+                            setState();
+                        } :
+                        () => {
+                            dispatch(addExpense({
+                                name,
+                                annualAmount: Number(annualAmount), 
+                                startAge: Number(startAge), 
+                                endAge: Number(endAge),
+                            }))
+                            setName("");
+                            setAnnualAmount("");
+                            setStartAge("");
+                            setEndAge("");
+                            setState();
+                        }
+                    }
                 >
                     Submit
                 </div>

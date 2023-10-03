@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import ModalForm from "../records/ModalForm";
-import { addIncome } from "../../../redux/slices/IncomeSlice";
+import { addIncome, updateIncome } from "../../../redux/slices/IncomeSlice";
 import { useDispatch } from "react-redux";
 
-export default function IncomeForm({ setState }) {
+export default function IncomeForm({ setState, index, income, mode }) {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
-    const [annualAmount, setAnnualAmount] = useState("");
-    const [startAge, setStartAge] = useState("");
-    const [endAge, setEndAge] = useState("");
+    const [name, setName] = useState((mode == "update") ? income.name : "");
+    const [annualAmount, setAnnualAmount] = useState((mode == "update") ? income.annualAmount : "");
+    const [startAge, setStartAge] = useState((mode == "update") ? income.startAge : "");
+    const [endAge, setEndAge] = useState((mode == "update") ? income.endAge : "");
 
     useEffect(() => {
         if (annualAmount < 0) setAnnualAmount(0)
@@ -49,18 +49,34 @@ export default function IncomeForm({ setState }) {
                 />
                 <div 
                     className="btn-main"
-                    onClick={() => {
-                        dispatch(addIncome({
-                            name,
-                            annualAmount: Number(annualAmount), 
-                            startAge: Number(startAge), 
-                            endAge: Number(endAge),
-                        }))
-                        setName("");
-                        setAnnualAmount("");
-                        setStartAge("");
-                        setEndAge("");
-                    }}
+                    onClick={
+                        (mode == "update") ?
+                        () => {
+                            dispatch(updateIncome({
+                                index, 
+                                data: {
+                                    name, 
+                                    annualAmount: Number(annualAmount), 
+                                    startAge: Number(startAge), 
+                                    endAge: Number(endAge)
+                                }
+                            }))
+                            setState();
+                        } :
+                        () => {
+                            dispatch(addIncome({
+                                name,
+                                annualAmount: Number(annualAmount), 
+                                startAge: Number(startAge), 
+                                endAge: Number(endAge),
+                            }))
+                            setName("");
+                            setAnnualAmount("");
+                            setStartAge("");
+                            setEndAge("");
+                            setState();
+                        }
+                    }
                 >
                     Submit
                 </div>

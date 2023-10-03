@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import ModalForm from "../records/ModalForm";
-import { addInvestment } from "../../../redux/slices/InvestmentSlice";
+import { addInvestment, updateInvestment } from "../../../redux/slices/InvestmentSlice";
 import { useDispatch } from "react-redux";
 
-export default function InvestmentForm({ setState }) {
+export default function InvestmentForm({ setState, index, investment, mode }) {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
-    const [initialAmount, setInitialAmount] = useState("");
-    const [annualAmount, setAnnualAmount] = useState("");
-    const [annualInterest, setAnnualInterest] = useState("");
-    const [startAge, setStartAge] = useState("");
-    const [endAge, setEndAge] = useState("");
-    const [withdrawAge, setWithdrawAge] = useState("");
-    const [annualWithdrawAmount, setAnnualWithdrawAmount] = useState("");
+    const [name, setName] = useState((mode == "update") ? investment.name : "");
+    const [initialAmount, setInitialAmount] = useState((mode == "update") ? investment.initialAmount : "");
+    const [annualAmount, setAnnualAmount] = useState((mode == "update") ? investment.annualAmount : "");
+    const [annualInterest, setAnnualInterest] = useState((mode == "update") ? investment.annualInterest : "");
+    const [startAge, setStartAge] = useState((mode == "update") ? investment.startAge : "");
+    const [endAge, setEndAge] = useState((mode == "update") ? investment.endAge : "");
+    const [withdrawAge, setWithdrawAge] = useState((mode == "update") ? investment.withdrawAge : "");
+    const [annualWithdrawAmount, setAnnualWithdrawAmount] = useState((mode == "update") ? investment.annualWithdrawAmount : "");
 
     useEffect(() => {
         if (initialAmount < 0) setInitialAmount(0);
@@ -86,26 +86,46 @@ export default function InvestmentForm({ setState }) {
                 />
                 <div 
                     className="btn-main"
-                    onClick={() => {
-                        dispatch(addInvestment({
-                            name,
-                            initialAmount: Number(initialAmount), 
-                            annualAmount: Number(annualAmount), 
-                            annualInterest: Number(annualInterest), 
-                            startAge: Number(startAge), 
-                            endAge: Number(endAge),
-                            withdrawAge: Number(withdrawAge),
-                            annualWithdrawAmount: Number(annualWithdrawAmount),
-                        }))
-                        setName("");
-                        setInitialAmount("");
-                        setAnnualAmount("");
-                        setAnnualInterest("");
-                        setStartAge("");
-                        setEndAge("");
-                        setWithdrawAge("");
-                        setAnnualWithdrawAmount("");
-                    }}
+                    onClick={
+                        (mode == "update") ?
+                        () => {
+                            dispatch(updateInvestment({
+                                index,
+                                data: {
+                                    name,
+                                    initialAmount: Number(initialAmount),
+                                    annualAmount: Number(annualAmount),
+                                    annualInterest: Number(annualInterest),
+                                    startAge: Number(startAge),
+                                    endAge: Number(endAge),
+                                    withdrawAge: Number(withdrawAge),
+                                    annualWithdrawAmount: Number(annualWithdrawAmount),
+                                }
+                            }))
+                            setState();
+                        } :
+                        () => {
+                            dispatch(addInvestment({
+                                name,
+                                initialAmount: Number(initialAmount), 
+                                annualAmount: Number(annualAmount), 
+                                annualInterest: Number(annualInterest), 
+                                startAge: Number(startAge), 
+                                endAge: Number(endAge),
+                                withdrawAge: Number(withdrawAge),
+                                annualWithdrawAmount: Number(annualWithdrawAmount),
+                            }))
+                            setName("");
+                            setInitialAmount("");
+                            setAnnualAmount("");
+                            setAnnualInterest("");
+                            setStartAge("");
+                            setEndAge("");
+                            setWithdrawAge("");
+                            setAnnualWithdrawAmount("");
+                            setState();
+                        }
+                    }
                 >
                     Submit
                 </div>

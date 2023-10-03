@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import ModalForm from "../records/ModalForm";
 import { useDispatch } from "react-redux";
-import { addLiability } from "../../../redux/slices/LiabilitySlice";
+import { addLiability, updateLiability } from "../../../redux/slices/LiabilitySlice";
 
-export default function LiabilityForm({ setState }) {
+export default function LiabilityForm({ setState, index, liability, mode }) {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
-    const [initialAmount, setInitialAmount] = useState("");
-    const [annualAmount, setAnnualAmount] = useState("");
-    const [startAge, setStartAge] = useState("");
-    const [endAge, setEndAge] = useState("");
-
+    const [name, setName] = useState((mode == "update") ? liability.name : "");
+    const [initialAmount, setInitialAmount] = useState((mode == "update") ? liability.initialAmount : "");
+    const [annualAmount, setAnnualAmount] = useState((mode == "update") ? liability.annualAmount : "");
+    const [startAge, setStartAge] = useState((mode == "update") ? liability.startAge : "");
+    const [endAge, setEndAge] = useState((mode == "update") ? liability.endAge : "");
 
     useEffect(() => {
         if (initialAmount < 0) setInitialAmount(0);
@@ -59,20 +58,37 @@ export default function LiabilityForm({ setState }) {
                 />
                 <div 
                     className="btn-main"
-                    onClick={() => {
-                        dispatch(addLiability({
-                            name,
-                            initialAmount: Number(initialAmount), 
-                            annualAmount: Number(annualAmount), 
-                            startAge: Number(startAge), 
-                            endAge: Number(endAge),
-                        }))
-                        setName("");
-                        setInitialAmount("");
-                        setAnnualAmount("");
-                        setStartAge("");
-                        setEndAge("");
-                    }}
+                    onClick={
+                        (mode == "update") ?
+                        () => {
+                            dispatch(updateLiability({
+                                index,
+                                data: {
+                                    name,
+                                    initialAmount: Number(initialAmount),
+                                    annualAmount: Number(annualAmount),
+                                    startAge: Number(startAge),
+                                    endAge: Number(endAge),
+                                }
+                            }))
+                            setState();
+                        } :
+                        () => {
+                            dispatch(addLiability({
+                                name,
+                                initialAmount: Number(initialAmount), 
+                                annualAmount: Number(annualAmount), 
+                                startAge: Number(startAge), 
+                                endAge: Number(endAge),
+                            }))
+                            setName("");
+                            setInitialAmount("");
+                            setAnnualAmount("");
+                            setStartAge("");
+                            setEndAge("");
+                            setState();
+                        }
+                    }
                 >
                     Submit
                 </div>
