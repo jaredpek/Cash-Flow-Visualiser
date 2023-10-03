@@ -5,11 +5,11 @@ import { addLiability, updateLiability } from "../../../redux/slices/LiabilitySl
 
 export default function LiabilityForm({ setState, index, liability, mode }) {
     const dispatch = useDispatch();
-    const [name, setName] = useState((mode == "update") ? liability.name : "");
-    const [initialAmount, setInitialAmount] = useState((mode == "update") ? liability.initialAmount : "");
-    const [annualAmount, setAnnualAmount] = useState((mode == "update") ? liability.annualAmount : "");
-    const [startAge, setStartAge] = useState((mode == "update") ? liability.startAge : "");
-    const [endAge, setEndAge] = useState((mode == "update") ? liability.endAge : "");
+    const [name, setName] = useState((mode === "update") ? liability.name : "");
+    const [initialAmount, setInitialAmount] = useState((mode === "update") ? liability.initialAmount : "");
+    const [annualAmount, setAnnualAmount] = useState((mode === "update") ? liability.annualAmount : "");
+    const [startAge, setStartAge] = useState((mode === "update") ? liability.startAge : "");
+    const [endAge, setEndAge] = useState((mode === "update") ? liability.endAge : "");
 
     useEffect(() => {
         if (initialAmount < 0) setInitialAmount(0);
@@ -59,7 +59,7 @@ export default function LiabilityForm({ setState, index, liability, mode }) {
                 <div 
                     className="btn-main"
                     onClick={
-                        (mode == "update") ?
+                        (mode === "update") ?
                         () => {
                             dispatch(updateLiability({
                                 index,

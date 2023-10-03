@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addInvestment } from "../../redux/slices/InvestmentSlice";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { getKey } from "../../lib/Helpers";
 import InvestmentRecord from "./records/InvestmentRecord";
 import TitleCard from "./TitleCard";
-import ModalForm from "./records/ModalForm";
 import InvestmentForm from "./forms/InvestmentForm";
 
 // investment = {

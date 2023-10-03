@@ -5,10 +5,10 @@ import { useDispatch } from "react-redux";
 
 export default function ExpenseForm({ setState, index, expense, mode }) {
     const dispatch = useDispatch();
-    const [name, setName] = useState((mode == "update") ? expense.name : "");
-    const [annualAmount, setAnnualAmount] = useState((mode == "update") ? expense.annualAmount : "");
-    const [startAge, setStartAge] = useState((mode == "update") ? expense.startAge : "");
-    const [endAge, setEndAge] = useState((mode == "update") ? expense.endAge : "");
+    const [name, setName] = useState((mode === "update") ? expense.name : "");
+    const [annualAmount, setAnnualAmount] = useState((mode === "update") ? expense.annualAmount : "");
+    const [startAge, setStartAge] = useState((mode === "update") ? expense.startAge : "");
+    const [endAge, setEndAge] = useState((mode === "update") ? expense.endAge : "");
 
     useEffect(() => {
         if (annualAmount < 0) setAnnualAmount(0)
@@ -50,7 +50,7 @@ export default function ExpenseForm({ setState, index, expense, mode }) {
                 <div 
                     className="btn-main"
                     onClick={
-                        (mode == "update") ?
+                        (mode === "update") ?
                         () => {
                             dispatch(updateExpense({
                                 index, 

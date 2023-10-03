@@ -5,14 +5,14 @@ import { useDispatch } from "react-redux";
 
 export default function InvestmentForm({ setState, index, investment, mode }) {
     const dispatch = useDispatch();
-    const [name, setName] = useState((mode == "update") ? investment.name : "");
-    const [initialAmount, setInitialAmount] = useState((mode == "update") ? investment.initialAmount : "");
-    const [annualAmount, setAnnualAmount] = useState((mode == "update") ? investment.annualAmount : "");
-    const [annualInterest, setAnnualInterest] = useState((mode == "update") ? investment.annualInterest : "");
-    const [startAge, setStartAge] = useState((mode == "update") ? investment.startAge : "");
-    const [endAge, setEndAge] = useState((mode == "update") ? investment.endAge : "");
-    const [withdrawAge, setWithdrawAge] = useState((mode == "update") ? investment.withdrawAge : "");
-    const [annualWithdrawAmount, setAnnualWithdrawAmount] = useState((mode == "update") ? investment.annualWithdrawAmount : "");
+    const [name, setName] = useState((mode === "update") ? investment.name : "");
+    const [initialAmount, setInitialAmount] = useState((mode === "update") ? investment.initialAmount : "");
+    const [annualAmount, setAnnualAmount] = useState((mode === "update") ? investment.annualAmount : "");
+    const [annualInterest, setAnnualInterest] = useState((mode === "update") ? investment.annualInterest : "");
+    const [startAge, setStartAge] = useState((mode === "update") ? investment.startAge : "");
+    const [endAge, setEndAge] = useState((mode === "update") ? investment.endAge : "");
+    const [withdrawAge, setWithdrawAge] = useState((mode === "update") ? investment.withdrawAge : "");
+    const [annualWithdrawAmount, setAnnualWithdrawAmount] = useState((mode === "update") ? investment.annualWithdrawAmount : "");
 
     useEffect(() => {
         if (initialAmount < 0) setInitialAmount(0);
@@ -87,7 +87,7 @@ export default function InvestmentForm({ setState, index, investment, mode }) {
                 <div 
                     className="btn-main"
                     onClick={
-                        (mode == "update") ?
+                        (mode === "update") ?
                         () => {
                             dispatch(updateInvestment({
                                 index,
