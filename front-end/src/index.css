@@ -11,7 +11,7 @@ hr {
 }
 
 .btn-main {
-    @apply px-5 py-3 outline-none rounded-lg cursor-pointer flex items-center justify-center bg-blue-500 text-white;
+    @apply px-5 py-3 outline-none rounded-lg cursor-pointer flex items-center justify-center bg-blue-400 text-white;
 }
 
 .icon {
@@ -19,7 +19,7 @@ hr {
 }
 
 .add {
-    @apply hover:text-green-500;
+    @apply hover:text-green-500 text-3xl;
 }
 
 .update {
@@ -52,6 +52,14 @@ hr {
 
 .footer {
     @apply w-full h-20 text-center py-4;
+}
+
+.title-main {
+    @apply text-3xl font-bold text-center mb-5;
+}
+
+.title-text {
+    @apply text-3xl font-bold;
 }
 
 .title-section {
@@ -87,5 +95,9 @@ hr {
 }
 
 .modal {
-    @apply absolute z-20 w-[93%] sm:w-[85%] lg:w-[65%] h-[70%] bg-white rounded-lg shadow-lg px-5 md:px-8 py-8 flex items-center;
+    @apply absolute z-20 w-[93%] md:w-[700px] max-h-[70%] bg-white rounded-lg shadow-lg px-5 md:px-8 py-12 overflow-y-auto;
+}
+
+.modal-exit {
+    @apply absolute z-30 top-[30px] right-0 text-white text-2xl backdrop-brightness-75 py-4 pl-6 pr-4 rounded-l-full cursor-pointer select-none;
 }

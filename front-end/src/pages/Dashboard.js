@@ -8,8 +8,8 @@ import LiabilitySection from "../components/visualiser/LiabilitySection";
 export default function Dashboard() {
     return (
         <Layout>
+            <div className="title-main">Dashboard</div>
             <div className="grid gap-5">
-                <div>Dashboard</div>
                 <CashFlowChart />
                 <IncomeSection />
                 <ExpenseSection />

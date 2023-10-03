@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ModalForm from "../records/ModalForm";
+import ModalForm from "./ModalForm";
 import { addInvestment, updateInvestment } from "../../../redux/slices/InvestmentSlice";
 import { useDispatch } from "react-redux";
 
@@ -27,6 +27,8 @@ export default function InvestmentForm({ setState, index, investment, mode }) {
     return (
         <ModalForm setState={setState}>
             <div className="input-section">
+                <div className="title-text">Investment</div>
+                <hr />
                 <input
                     value={name}
                     onChange={e => setName(e.target.value)}

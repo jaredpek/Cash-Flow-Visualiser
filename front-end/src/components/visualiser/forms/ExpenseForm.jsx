@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ModalForm from "../records/ModalForm";
+import ModalForm from "./ModalForm";
 import { addExpense, updateExpense } from "../../../redux/slices/ExpenseSlice";
 import { useDispatch } from "react-redux";
 
@@ -19,6 +19,8 @@ export default function ExpenseForm({ setState, index, expense, mode }) {
     return (
         <ModalForm setState={setState}>
             <div className="input-section">
+                <div className="title-text">Expense</div>
+                <hr />
                 <input
                     value={name}
                     onChange={e => setName(e.target.value)}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ModalForm from "../records/ModalForm";
+import ModalForm from "./ModalForm";
 import { addIncome, updateIncome } from "../../../redux/slices/IncomeSlice";
 import { useDispatch } from "react-redux";
 
@@ -19,6 +19,8 @@ export default function IncomeForm({ setState, index, income, mode }) {
     return (
         <ModalForm setState={setState}>
             <div className="input-section">
+                <div className="title-text">Income</div>
+                <hr />
                 <input
                     value={name}
                     onChange={e => setName(e.target.value)}

@@ -27,8 +27,6 @@ export default function CashFlowChart() {
 
     return (
         <div>
-            <div>Cash Flow Visualiser</div>
-            <hr />
             <div className="input-section">
                 <div>
                     <label>From: </label>

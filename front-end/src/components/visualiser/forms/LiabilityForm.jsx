@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ModalForm from "../records/ModalForm";
+import ModalForm from "./ModalForm";
 import { useDispatch } from "react-redux";
 import { addLiability, updateLiability } from "../../../redux/slices/LiabilitySlice";
 
@@ -21,6 +21,8 @@ export default function LiabilityForm({ setState, index, liability, mode }) {
     return (
         <ModalForm setState={setState}>
             <div className="input-section">
+                <div className="title-text">Liability</div>
+                <hr />
                 <input
                     value={name}
                     onChange={e => setName(e.target.value)}
