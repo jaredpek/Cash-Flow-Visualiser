@@ -18,7 +18,7 @@ export default function InvestmentRecord({ index, investment }) {
 
     return (
         <RecordCard
-            updating={updating} 
+            updating={updating}
             setUpdating={setUpdating}
             updateRecord={() => {
                 dispatch(updateInvestment({

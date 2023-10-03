@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addExpense } from "../../redux/slices/ExpenseSlice";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { getKey } from "../../lib/Helpers";
 import ExpenseRecord from "./records/ExpenseRecord";
+import TitleCard from "./TitleCard";
+import ExpenseForm from "./forms/ExpenseForm";
 
 export default function ExpenseSection() {
     // expense = {
@@ -12,72 +13,28 @@ export default function ExpenseSection() {
     //     endAge: Number,
     // }
 
-    const dispatch = useDispatch();
     const expenses = useSelector(state => state.Expense)
-
-    const [name, setName] = useState("");
-    const [annualAmount, setAnnualAmount] = useState("");
-    const [startAge, setStartAge] = useState("");
-    const [endAge, setEndAge] = useState("");
-
-    useEffect(() => {
-        if (annualAmount < 0) setAnnualAmount(0)
-        if (startAge < 0) setStartAge(0)
-        if (endAge < 0) setEndAge(0)
-    }, [annualAmount, startAge, endAge])
+    const [adding, setAdding] = useState(false);
 
     return (
         <div>
-            Expenses
-            <div className="input-section">
-                <input
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    placeholder="Name"
-                />
-                <input
-                    min={0}
-                    type="number"
-                    value={annualAmount}
-                    onChange={e => setAnnualAmount(e.target.value)}
-                    placeholder="Annual Amount"
-                />
-                <input
-                    min={0}
-                    type="number"
-                    value={startAge}
-                    onChange={e => setStartAge(e.target.value)}
-                    placeholder="Start Age"
-                />
-                <input
-                    min={0}
-                    type="number"
-                    value={endAge}
-                    onChange={e => setEndAge(e.target.value)}
-                    placeholder="End Age"
-                />
-                <div 
-                    className="btn-main add"
-                    onClick={() => {
-                        dispatch(addExpense({
-                            name,
-                            annualAmount: Number(annualAmount), 
-                            startAge: Number(startAge), 
-                            endAge: Number(endAge),
-                        }))
-                        setName("");
-                        setAnnualAmount("");
-                        setStartAge("");
-                        setEndAge("");
-                    }}
-                >
-                    +
-                </div>
-            </div>
+            <TitleCard
+                title={"Expenses"}
+                setState={() => setAdding(true)}
+            />
+            <hr />
+            {
+                adding &&
+                <ExpenseForm setState={() => setAdding(false)} />
+            }
             <div className="record-section">
-                {expenses.map(expense => {
-                    return <ExpenseRecord key={getKey()} index={expenses.indexOf(expense)} expense={expense} />;
-                })}
+                {
+                    expenses.length ?
+                    expenses.map(expense => {
+                        return <ExpenseRecord key={getKey()} index={expenses.indexOf(expense)} expense={expense} />;
+                    }) :
+                    <div>No expense records...</div>
+                }
             </div>
         </div>
     )
